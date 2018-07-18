@@ -1,32 +1,41 @@
-local frame = CreateFrame("Frame", nil , UIParent, "WorldStateAlwaysUpTemplate")
+local frame = CreateFrame("Frame", nil , UIParent)
 local _
-local UnitDebuff, dampeningtext = UnitDebuff, GetSpellInfo(110310)
-_, frame.text = frame:GetRegions()
+local FindAuraByName = AuraUtil.FindAuraByName
+local dampeningtext = GetSpellInfo(110310)
 
-frame:SetScript("OnEvent", function(self, event, ...) self[event](...) end)
+
+frame:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:SetPoint("TOP", WorldStateAlwaysUpFrame, "BOTTOM",-23,-10)
+frame:SetPoint("TOP", UIWidgetTopCenterContainerFrame, "BOTTOM", 0, 0)
+frame:SetSize(200, 11.38) --11,38 is the height of the remaining time
+frame.text = frame:CreateFontString(nil, "BACKGROUND")
+frame.text:SetFontObject(GameFontNormalSmall)
+frame.text:SetAllPoints()
 
-function frame.UNIT_AURA(unit)
-	local _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, percentage = UnitDebuff(unit, dampeningtext)
+
+function frame:UNIT_AURA(unit)
+	--     1	  2		3		4			5			6			7			8				9				  10		11			12				13				14		15		   16
+	local name, icon, count, debuffType, duration, expirationTime, source, isStealable, nameplateShowPersonal, spellID, canApplyAura, isBossDebuff, nameplateShowAll, noIdea, timeMod , percentage = FindAuraByName(dampeningtext, unit, "HARMFUL")
+
 	if percentage then
-		if not frame:IsShown() then -- only do this stuff when the buff appears the first time	
-			frame:Show()
+		if not self:IsShown() then
+			self:Show()
 		end
-		if frame.dampening ~= percentage then
-			frame.dampening = percentage
-			frame.text:SetText(dampeningtext..": "..percentage.."%")
+		if self.dampening ~= percentage then
+			self.dampening = percentage
+			self.text:SetText(dampeningtext..": "..percentage.."%")
 		end
-	elseif frame:IsShown() then
-		frame:Hide()
+
+	elseif self:IsShown() then
+		self:Hide()
 	end
 end
 
-function frame.PLAYER_ENTERING_WORLD()
+function frame:PLAYER_ENTERING_WORLD()
 	local _, instanceType = IsInInstance()
 	if instanceType == "arena" then
-		frame:RegisterUnitEvent("UNIT_AURA", "player")
+		self:RegisterUnitEvent("UNIT_AURA", "player")
 	else	
-		frame:UnregisterEvent("UNIT_AURA")
+		self:UnregisterEvent("UNIT_AURA")
 	end
 end
