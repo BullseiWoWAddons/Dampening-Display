@@ -2,10 +2,12 @@ local frame = CreateFrame("Frame", nil , UIParent, "UIWidgetTemplateIconAndText"
 local _
 local FindAuraByName = AuraUtil.FindAuraByName
 local dampeningtext = GetSpellInfo(110310)
+local widgetSetID = C_UIWidgetManager.GetTopCenterWidgetSetID()
+local widgetSetInfo = C_UIWidgetManager.GetWidgetSetInfo(widgetSetID)
+
 
 --this will maybe be the prefered way in the future
--- local widgetSetID = C_UIWidgetManager.GetTopCenterWidgetSetID()
--- local widgetSetInfo = C_UIWidgetManager.GetWidgetSetInfo(widgetSetID)
+
 -- local widgetInfo = {
 -- 	hasTimer = false,
 -- 	orderIndex = 999999,
