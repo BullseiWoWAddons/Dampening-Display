@@ -1,4 +1,4 @@
-local frame = CreateFrame("Frame", nil , UIParent, "UIWidgetTemplateIconAndText")
+local frame = CreateFrame("Frame", "testframe" , UIParent, "UIWidgetTemplateIconAndText")
 local _
 local FindAuraByName = AuraUtil.FindAuraByName
 local dampeningtext = GetSpellInfo(110310)
@@ -21,6 +21,10 @@ local widgetSetInfo = C_UIWidgetManager.GetWidgetSetInfo(widgetSetID)
 frame:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetPoint(UIWidgetTopCenterContainerFrame.verticalAnchorPoint, UIWidgetTopCenterContainerFrame, UIWidgetTopCenterContainerFrame.verticalRelativePoint, 0, widgetSetInfo.verticalPadding)
+frame.Text:SetParent(frame)
+frame:SetWidth(200)
+frame.Text:SetAllPoints()
+frame.Text:SetJustifyH("CENTER")
 
 
 function frame:UNIT_AURA(unit)
