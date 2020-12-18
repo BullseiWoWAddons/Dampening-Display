@@ -1,16 +1,24 @@
-local frame = CreateFrame("Frame", nil , UIParent)
+local frame = CreateFrame("Frame", nil , UIParent, "UIWidgetTemplateIconAndText")
 local _
 local FindAuraByName = AuraUtil.FindAuraByName
 local dampeningtext = GetSpellInfo(110310)
 
+--this will maybe be the prefered way in the future
+-- local widgetSetID = C_UIWidgetManager.GetTopCenterWidgetSetID()
+-- local widgetSetInfo = C_UIWidgetManager.GetWidgetSetInfo(widgetSetID)
+-- local widgetInfo = {
+-- 	hasTimer = false,
+-- 	orderIndex = 999999,
+-- 	widgetTag = "dampening",
+-- 	inAnimType = false,
+-- 	outAnimType = false,
+-- 	layoutDirection = Enum.UIWidgetLayoutDirection.Vertical
+-- }
+--local frame = UIWidgetTopCenterContainerFrame:CreateWidget(99999999, 0, UIWidgetManager:GetWidgetTypeInfo(0), widgetInfo)
 
 frame:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:SetPoint("TOP", UIWidgetTopCenterContainerFrame, "BOTTOM", 0, 0)
-frame:SetSize(200, 11.38) --11,38 is the height of the remaining time
-frame.text = frame:CreateFontString(nil, "BACKGROUND")
-frame.text:SetFontObject(GameFontNormalSmall)
-frame.text:SetAllPoints()
+frame:SetPoint(UIWidgetTopCenterContainerFrame.verticalAnchorPoint, UIWidgetTopCenterContainerFrame, UIWidgetTopCenterContainerFrame.verticalRelativePoint, 0, widgetSetInfo.verticalPadding)
 
 
 function frame:UNIT_AURA(unit)
@@ -23,7 +31,7 @@ function frame:UNIT_AURA(unit)
 		end
 		if self.dampening ~= percentage then
 			self.dampening = percentage
-			self.text:SetText(dampeningtext..": "..percentage.."%")
+			self.Text:SetText(dampeningtext..": "..percentage.."%")
 		end
 
 	elseif self:IsShown() then
