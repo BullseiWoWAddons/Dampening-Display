@@ -1,7 +1,7 @@
-## Interface: 90002
+## Interface: 90200
 ## Title: Dampening Display
 ## Author: bullsei@curseforge
-## Version: 9.0.2
+## Version: 9.2.0
 ## Notes: Shows the actual dampening value under the remaining time in arena
 ## X-Curse-Project-ID: 258041
 
