@@ -1,4 +1,4 @@
-local frame = CreateFrame("Frame", "testframe" , UIParent, "UIWidgetTemplateIconAndText")
+local frame = CreateFrame("Frame", "Dampening_Display" , UIParent, "UIWidgetTemplateIconAndText")
 local _
 local FindAuraByName = AuraUtil.FindAuraByName
 local dampeningtext = GetSpellInfo(110310)
