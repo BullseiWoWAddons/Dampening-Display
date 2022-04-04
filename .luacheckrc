@@ -115,6 +115,7 @@ globals = {
 	"CombatLog_String_GetIcon",
 	"CreateFrame",
 	"C_BattleNet",
+	"C_Commentator",
 	"C_CVar",
 	"C_NamePlate",
 	"C_RaidLocks",
