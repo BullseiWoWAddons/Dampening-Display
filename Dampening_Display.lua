@@ -1,9 +1,9 @@
 local frame = CreateFrame("Frame", "Dampening_Display" , UIParent, "UIWidgetTemplateIconAndText")
 local _
-local FindAuraByName = AuraUtil.FindAuraByName
 local dampeningtext = GetSpellInfo(110310)
 local widgetSetID = C_UIWidgetManager.GetTopCenterWidgetSetID()
 local widgetSetInfo = C_UIWidgetManager.GetWidgetSetInfo(widgetSetID)
+local C_Commentator_GetDampeningPercent = C_Commentator.GetDampeningPercent
 
 
 --this will maybe be the prefered way in the future
@@ -29,9 +29,9 @@ frame.Text:SetJustifyH("CENTER")
 
 function frame:UNIT_AURA(unit)
 	--     1	  2		3		4			5			6			7			8				9				  10		11			12				13				14		15		   16
-	local name, icon, count, debuffType, duration, expirationTime, source, isStealable, nameplateShowPersonal, spellID, canApplyAura, isBossDebuff, nameplateShowAll, noIdea, timeMod , percentage = FindAuraByName(dampeningtext, unit, "HARMFUL")
-
-	if percentage then
+	--local name, icon, count, debuffType, duration, expirationTime, source, isStealable, nameplateShowPersonal, spellID, canApplyAura, isBossDebuff, nameplateShowAll, noIdea, timeMod , percentage = FindAuraByName(dampeningtext, unit, "HARMFUL")
+	local percentage = C_Commentator_GetDampeningPercent()
+	if percentage and percentage > 0 then
 		if not self:IsShown() then
 			self:Show()
 		end
