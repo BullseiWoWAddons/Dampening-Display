@@ -51,5 +51,6 @@ function frame:PLAYER_ENTERING_WORLD()
 		self:RegisterUnitEvent("UNIT_AURA", "player")
 	else	
 		self:UnregisterEvent("UNIT_AURA")
+		self:Hide()
 	end
 end
