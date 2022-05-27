@@ -152,6 +152,7 @@ globals = {
 	"GetNumSpecializationsForClassID",
 	"GetNumSpellTabs",
 	"GetPartyAssignment",
+	"GetPlayerAuraBySpellID",
 	"GetPlayerFacing",
 	"GetProfessionInfo",
 	"GetProfessions",
