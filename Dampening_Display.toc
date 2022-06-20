@@ -1,10 +1,9 @@
-## Interface: 90200
-## Interface-Retail: 90200
-## Interface-BCC: 20503
-## Interface-Classic: 11402
+## Interface: 90205
+## Interface-Classic: 11403
+## Interface-BCC: 20504
 ## Title: Dampening Display
 ## Author: bullsei@curseforge
-## Version: 9.2.0.4
+## Version: @project-version@
 ## Notes: Shows the actual dampening value under the remaining time in arena
 ## X-Curse-Project-ID: 258041
 
