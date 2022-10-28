@@ -1,9 +1,24 @@
 local frame = CreateFrame("Frame", "Dampening_Display" , UIParent, "UIWidgetTemplateIconAndText")
 local _
-local dampeningtext = GetSpellInfo(110310)
+local spellID = 110310
+local dampeningtext = GetSpellInfo(spellID)
 local widgetSetID = C_UIWidgetManager.GetTopCenterWidgetSetID()
 local widgetSetInfo = C_UIWidgetManager.GetWidgetSetInfo(widgetSetID)
-local C_Commentator_GetDampeningPercent = C_Commentator.GetDampeningPercent
+
+local getDampeningValue
+if GetPlayerAuraBySpellID then
+	getDampeningValue = function()
+			  --1	 2	 	3		4			5			6			   7			8				9				  10		11			12				13			14		15		   16
+		local name, icon, count, debuffType, duration, expirationTime, source, isStealable, nameplateShowPersonal, spellID, canApplyAura, isBossDebuff, nameplateShowAll, noIdea, timeMod, percentage = GetPlayerAuraBySpellID(spellID) -- FindAuraByName(dampeningtext, unit, "HARMFUL")GetPlayerAuraBySpellID 
+		return percentage
+	end 
+elseif C_UnitAuras and C_UnitAuras.GetPlayerAuraBySpellID then
+	getDampeningValue = function()
+		local aura = C_UnitAuras.GetPlayerAuraBySpellID(spellID)
+		if aura then return aura.points[1] end
+	end
+end
+
 
 
 --this will maybe be the prefered way in the future
@@ -28,9 +43,8 @@ frame.Text:SetJustifyH("CENTER")
 
 
 function frame:UNIT_AURA(unit)
-	--     1	  2		3		4			5			6			7			8				9				  10		11			12				13				14		15		   16
-	local name, icon, count, debuffType, duration, expirationTime, source, isStealable, nameplateShowPersonal, spellID, canApplyAura, isBossDebuff, nameplateShowAll, noIdea, timeMod, percentage = GetPlayerAuraBySpellID(110310) -- FindAuraByName(dampeningtext, unit, "HARMFUL")
-	--local percentage = C_Commentator_GetDampeningPercent()
+	local percentage = getDampeningValue()
+		--local percentage = C_Commentator_GetDampeningPercent()
 	if percentage and percentage > 0 then
 		if not self:IsShown() then
 			self:Show()
