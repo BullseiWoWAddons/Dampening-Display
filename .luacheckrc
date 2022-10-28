@@ -123,6 +123,7 @@ globals = {
 	"C_Spell",
 	"C_Timer",
 	"C_UIWidgetManager",
+	"C_UnitAuras",
 	"DebuffTypeColor",
 	"EJ_GetCreatureInfo",
 	"EJ_GetEncounterInfo",
