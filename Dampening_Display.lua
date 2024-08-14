@@ -1,8 +1,15 @@
-local GetSpellInfo = C_Spell and C_Spell.GetSpellInfo or GetSpellInfo
 local frame = CreateFrame("Frame", "Dampening_Display" , UIParent, "UIWidgetTemplateIconAndText")
 local _
 local spellID = 110310
-local dampeningtext = GetSpellInfo(spellID)
+
+local dampeningtext
+if C_Spell and C_Spell.GetSpellInfo then
+	local spellInfo = C_Spell.GetSpellInfo(spellID)
+	dampeningtext = spellInfo and spellInfo.name
+else
+	dampeningtext = GetSpellInfo(spellID)
+end
+
 local widgetSetID = C_UIWidgetManager.GetTopCenterWidgetSetID()
 local widgetSetInfo = C_UIWidgetManager.GetWidgetSetInfo(widgetSetID)
 
