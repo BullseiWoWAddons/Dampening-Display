@@ -1,3 +1,4 @@
+local GetSpellInfo = C_Spell and C_Spell.GetSpellInfo or GetSpellInfo
 local frame = CreateFrame("Frame", "Dampening_Display" , UIParent, "UIWidgetTemplateIconAndText")
 local _
 local spellID = 110310
@@ -11,7 +12,7 @@ if GetPlayerAuraBySpellID then
 			  --1	 2	 	3		4			5			6			   7			8				9				  10		11			12				13			14		15		   16
 		local name, icon, count, debuffType, duration, expirationTime, source, isStealable, nameplateShowPersonal, spellID, canApplyAura, isBossDebuff, nameplateShowAll, noIdea, timeMod, percentage = GetPlayerAuraBySpellID(spellID) -- FindAuraByName(dampeningtext, unit, "HARMFUL")GetPlayerAuraBySpellID 
 		return percentage
-	end 
+	end
 elseif C_UnitAuras and C_UnitAuras.GetPlayerAuraBySpellID then
 	getDampeningValue = function()
 		local aura = C_UnitAuras.GetPlayerAuraBySpellID(spellID)
@@ -63,7 +64,7 @@ function frame:PLAYER_ENTERING_WORLD()
 	local _, instanceType = IsInInstance()
 	if instanceType == "arena" then
 		self:RegisterUnitEvent("UNIT_AURA", "player")
-	else	
+	else
 		self:UnregisterEvent("UNIT_AURA")
 		self:Hide()
 	end
