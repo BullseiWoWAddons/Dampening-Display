@@ -1,6 +1,7 @@
 {
 	"Lua.diagnostics.globals": [
-		"UIWidgetTopCenterContainerFrame"
+		"UIWidgetTopCenterContainerFrame",
+		"UIParent"
 	],
 	"Lua.runtime.version": "Lua 5.1",
 	"Lua.runtime.builtin": {
