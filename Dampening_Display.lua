@@ -43,6 +43,8 @@ end
 
 frame:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+frame:SetScript("OnEnter", nil)
+frame:SetScript("OnLeave", nil)
 frame:SetPoint(UIWidgetTopCenterContainerFrame.verticalAnchorPoint, UIWidgetTopCenterContainerFrame, UIWidgetTopCenterContainerFrame.verticalRelativePoint, 0, widgetSetInfo.verticalPadding)
 frame.Text:SetParent(frame)
 frame:SetWidth(200)
